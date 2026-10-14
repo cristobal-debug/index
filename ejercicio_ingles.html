@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de Corrección de Inglés</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .instructions {
+            background-color: #e8f4f8;
+            border-left: 5px solid #3498db;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        .text-container {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            line-height: 2.2;
+            font-size: 1.1rem;
+        }
+        select {
+            font-size: 1rem;
+            padding: 4px 8px;
+            border: 2px solid #bdc3c7;
+            border-radius: 4px;
+            background-color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        select.correct {
+            border-color: #2ecc71;
+            background-color: #e8f8f5;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        select.incorrect {
+            border-color: #e74c3c;
+            background-color: #fadbd8;
+            color: #c0392b;
+            font-weight: bold;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 25px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #result {
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-top: 20px;
+            min-height: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Práctica de Inglés: Encuentra y Corrige los Errores</h1>
+    
+    <div class="instructions">
+        <p><strong>Instrucciones:</strong> Selecciona la opción correcta en cada uno de los desplegables para corregir los errores de gramática, mayúsculas y ortografía del texto original.</p>
+    </div>
+
+    <div class="text-container">
+        I am a very active person. I enjoy 
+        <select data-answer="doing sports">
+            <option value="">--Selecciona--</option>
+            <option value="do sports">do sports</option>
+            <option value="doing sports">doing sports</option>
+            <option value="to doing sports">to doing sports</option>
+        </select> 
+        very much. I go swimming on 
+        <select data-answer="Thursdays">
+            <option value="">--Selecciona--</option>
+            <option value="thursdays">thursdays</option>
+            <option value="Thursdays">Thursdays</option>
+            <option value="Thursday">Thursday</option>
+        </select> 
+        and on the rest of the days, 
+        <select data-answer="I do">
+            <option value="">--Selecciona--</option>
+            <option value="i do">i do</option>
+            <option value="I do">I do</option>
+            <option value="I am doing">I am doing</option>
+        </select> 
+        other types of sporty activities, like running and cycling. My favorite month is 
+        <select data-answer="December">
+            <option value="">--Selecciona--</option>
+            <option value="december">december</option>
+            <option value="December">December</option>
+            <option value="december,">december,</option>
+        </select>, 
+        because I love Christmas! I also like that month because I can 
+        <select data-answer="sleep">
+            <option value="">--Selecciona--</option>
+            <option value="sleeping">sleeping</option>
+            <option value="sleep">sleep</option>
+            <option value="to sleep">to sleep</option>
+        </select> 
+        a lot. I don't have a big family, but we are very happy together. My mother can 
+        <select data-answer="cook">
+            <option value="">--Selecciona--</option>
+            <option value="cooks">cooks</option>
+            <option value="cook">cook</option>
+            <option value="cooking">cooking</option>
+        </select> 
+        very well, and she always prepares delicious meals. My son 
+        <select data-answer="likes singing">
+            <option value="">--Selecciona--</option>
+            <option value="likes sing">likes sing</option>
+            <option value="likes singing">likes singing</option>
+            <option value="like singing">like singing</option>
+        </select> 
+        Christmas carols in 
+        <select data-answer="English">
+            <option value="">--Selecciona--</option>
+            <option value="english">english</option>
+            <option value="English">English</option>
+            <option value="english.">english.</option>
+        </select>. 
+        And on Christmas Day, we always watch some music shows on 
+        <select data-answer="TV.">
+            <option value="">--Selecciona--</option>
+            <option value="tv">tv</option>
+            <option value="TV">TV</option>
+            <option value="TV.">TV.</option>
+        </select>
+    </div>
+
+    <div class="btn-container">
+        <button onclick="checkAnswers()">Comprobar Respuestas</button>
+    </div>
+
+    <div id="result"></div>
+
+    <script>
+        function checkAnswers() {
+            const selects = document.querySelectorAll('select');
+            let score = 0;
+            let total = selects.length;
+
+            selects.forEach(select => {
+                const answer = select.getAttribute('data-answer');
+                if (select.value === answer) {
+                    select.className = 'correct';
+                    score++;
+                } else {
+                    select.className = 'incorrect';
+                }
+            });
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerText = `Has acertado ${score} de ${total} respuestas.`;
+            
+            if (score === total) {
+                resultDiv.style.color = '#27ae60';
+            } else {
+                resultDiv.style.color = '#e74c3c';
+            }
+        }
+    </script>
+
+</body>
+</html>
